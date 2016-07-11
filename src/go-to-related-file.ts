@@ -1,5 +1,7 @@
 import * as vscode from 'vscode';
 
+import * as fs from "fs";
+
 export class GoToRelatedFile {
   /**
    *
@@ -10,30 +12,28 @@ export class GoToRelatedFile {
 
   execute() {
     // get file path
-    let fileName = this.fileLocator.getCurrentFileName();
+    let file = this.fileLocator.getCurrentFileName();
 
     // get directory
     let directory = this.fileLocator.getCurrentFolder();
 
     // get related files
-    let relatedFiles = this.fileLocator.searchFiles(directory, this.getFilePattern(fileName));
+    let relatedFiles = this.fileLocator.searchFiles(directory, file);
 
-    // if(relatedFiles.length === 1){
-    //   // navigate to file
-    // } else {
-    //   // select file
-    // }
+    if(relatedFiles.length === 1){
+      this.fileLocator.openFile(directory, relatedFiles[0])
+    } else {
+      vscode.window.showQuickPick(relatedFiles).then(file => {
+        this.fileLocator.openFile(directory, file);
+      })
+    }
     
     // Display a message box to the user
-    vscode.window.showInformationMessage(fileName);
+    //vscode.window.showInformationMessage(file.name);
   }
 
   deactivate() {
 
-  }
-
-  private getFilePattern(fileName: string): string {
-    return undefined;
   }
 }
 
@@ -47,12 +47,29 @@ export class FileLocator {
     return this.getCurrentPath().replace(/\/[^/]+\.\w+$/, "");
   }
 
-  getCurrentFileName(): string {
-    return vscode.window.activeTextEditor.document.fileName;
+  getCurrentFileName(): FileInfo {
+    let match = /\/([^/]+)\.(\w+)$/.exec(this.getCurrentPath());
+    return { 
+      name: match[1], 
+      ext: match[2]
+    };
   }
 
-  searchFiles(directory: string, fileName: string): string[] {
-    return undefined;
+  searchFiles(directory: string, fileInfo: FileInfo): string[] {
+    return fs.readdirSync(directory)
+             .filter(file => file.startsWith(fileInfo.name) && !file.endsWith(`.${fileInfo.ext}`));
   }
 
+  openFile(directory: string, file: string) {
+    let filePath = `${directory}/${file}`;
+    vscode.workspace.openTextDocument(filePath).then(document => {
+      vscode.window.showTextDocument(document);
+    });
+  }
+
+}
+
+export interface FileInfo {
+  name: string;
+  ext: string;
 }
