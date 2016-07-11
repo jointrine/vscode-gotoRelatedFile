@@ -2,7 +2,7 @@
   "name": "goto-related-file",
   "displayName": "Go to Related File",
   "description": "Navigate to a file with the same name but different extension",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "niclassahlin",
   "engines": {
     "vscode": "^1.0.0"
