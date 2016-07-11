@@ -1,3 +1,3 @@
 export var settings = {
-  "rootCommand": "navigateToRelatedFile"
+  "rootCommand": "gotoRelatedFile"
 };

@@ -6,16 +6,11 @@ This is the README for your extension "goto-related-file". After writing up a br
 
 This extension provides quick navigation between files that are related through the name. 
 
-## Extension Settings
+## Usage
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+Open the command palette and enter `Go to Related File`.
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+You can also add a keyboard shortcut to the command `gotoRelatedFile.goToRelated` (I like `Cmd+Alt+P` :))
 
 ## Release Notes
 

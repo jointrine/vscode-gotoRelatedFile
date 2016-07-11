@@ -12,13 +12,13 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:navigateToRelatedFile.goToRelated"
+    "onCommand:gotoRelatedFile.goToRelated"
   ],
   "main": "./out/src/extension",
   "contributes": {
     "commands": [
       {
-        "command": "navigateToRelatedFile.goToRelated",
+        "command": "gotoRelatedFile.goToRelated",
         "title": "Go to Related File"
       }
     ]
