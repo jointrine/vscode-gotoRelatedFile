@@ -1,12 +1,13 @@
 {
-  "name": "navigate-to-related-file",
-  "displayName": "Navigate To Related File",
+  "name": "goto-related-file",
+  "displayName": "Go to Related File",
   "description": "Navigate to a file with the same name but different extension",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "publisher": "niclassahlin",
   "engines": {
     "vscode": "^1.0.0"
   },
+  "license": "MIT",
   "categories": [
     "Other"
   ],
@@ -18,7 +19,7 @@
     "commands": [
       {
         "command": "navigateToRelatedFile.goToRelated",
-        "title": "Navigate To Related File"
+        "title": "Go to Related File"
       }
     ]
   },
